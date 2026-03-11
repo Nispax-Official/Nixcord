@@ -74,8 +74,9 @@ export function findModuleByDisplayName(name: string): unknown | null {
   if (resolvedCache.has(cacheKey)) return resolvedCache.get(cacheKey) ?? null;
 
   const result = findModule(exports => {
-    return (exports as Record<string, unknown>)?.displayName === name
-      || (exports as Record<string, unknown>)?.default?.displayName === name;
+    const e = exports as Record<string, unknown>;
+    const d = e?.default as Record<string, unknown> | undefined;
+    return e?.displayName === name || d?.displayName === name;
   });
 
   if (result) resolvedCache.set(cacheKey, result);

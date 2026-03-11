@@ -4,10 +4,9 @@
  * Renders plugin list, theme manager, updater status, and custom CSS editor.
  */
 
-import { getAllPlugins, togglePlugin, isPluginEnabled, getPluginError } from "../core/src/plugins/registry";
-import { getAllThemes, toggleTheme, isThemeEnabled, applyCustomCSS, getCustomCSS } from "../core/src/themes/engine";
-import { checkForUpdate, performUpdate, getLastUpdateCheck, getCurrentSha } from "../core/src/utils/updater";
-import { Settings } from "../core/src/settings/store";
+import { getAllPlugins, togglePlugin, isPluginEnabled } from "../plugins/registry";
+import { getAllThemes, toggleTheme, isThemeEnabled, applyCustomCSS, getCustomCSS } from "../themes/engine";
+import { checkForUpdate, performUpdate, getLastUpdateCheck, getCurrentSha } from "../utils/updater";
 
 type Tab = "plugins" | "themes" | "updater" | "customcss";
 
