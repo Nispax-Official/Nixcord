@@ -5,7 +5,6 @@
 
 const REPO_OWNER = "NISPAX-InfoTech";
 const REPO_NAME = "nixcord";
-const UPDATE_INTERVAL_MS = 6 * 60 * 60 * 1000; // 6 hours
 
 interface StoredState {
   lastSha: string;
@@ -42,13 +41,9 @@ async function checkForUpdate() {
 
     const latestSha = commits[0].sha;
     const state = await getState();
-
     const hasUpdate = state.lastSha !== "" && state.lastSha !== latestSha;
 
-    await saveState({
-      lastCheck: Date.now(),
-      updateAvailable: hasUpdate
-    });
+    await saveState({ lastCheck: Date.now(), updateAvailable: hasUpdate });
 
     if (hasUpdate) {
       chrome.action.setBadgeText({ text: "!" });
@@ -57,7 +52,6 @@ async function checkForUpdate() {
       chrome.action.setBadgeText({ text: "" });
     }
 
-    // First-time: just store the SHA, don't show update
     if (!state.lastSha) {
       await saveState({ lastSha: latestSha });
     }
@@ -66,25 +60,28 @@ async function checkForUpdate() {
   }
 }
 
-// Run update check periodically
-chrome.alarms.create("nixcord-update-check", { periodInMinutes: 360 });
+// Register alarm on install/update — must be done in onInstalled for MV3
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.alarms.create("nixcord-update-check", { periodInMinutes: 360 });
+  checkForUpdate();
+});
+
+// Also run check when service worker wakes up
+chrome.runtime.onStartup.addListener(() => {
+  checkForUpdate();
+});
+
 chrome.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === "nixcord-update-check") checkForUpdate();
 });
 
-// Run on startup
-checkForUpdate();
-
-// Handle messages from popup
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg.type === "GET_STATE") {
     getState().then(sendResponse);
-    return true; // async
+    return true;
   }
   if (msg.type === "CHECK_UPDATE") {
     checkForUpdate().then(() => getState()).then(sendResponse);
     return true;
   }
 });
-
-export {};

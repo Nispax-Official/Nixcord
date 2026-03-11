@@ -20,14 +20,14 @@ async function buildExtension() {
     platform: "browser",
   });
 
-  // Build background script
+  // Build background script (MV3 service worker needs iife)
   await esbuild.build({
     entryPoints: ["src/background/background.ts"],
     outfile: `${OUT_CHROME}/background/background.js`,
     bundle: true,
     minify: true,
     target: ["chrome112"],
-    format: "esm",
+    format: "iife",
     platform: "browser",
   });
 

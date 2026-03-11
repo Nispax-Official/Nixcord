@@ -26,8 +26,7 @@
     "https://canary.discord.com/*"
   ],
   "background": {
-    "service_worker": "background/background.js",
-    "type": "module"
+    "service_worker": "background/background.js"
   },
   "content_scripts": [
     {
