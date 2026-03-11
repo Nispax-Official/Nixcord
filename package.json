@@ -1,0 +1,26 @@
+{
+  "name": "nixcord",
+  "version": "1.0.0",
+  "description": "A performance-first Discord mod client by NISPAX InfoTech",
+  "private": true,
+  "workspaces": [
+    "core",
+    "desktop",
+    "extension",
+    "installer"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "build:core": "npm run build --workspace=core",
+    "build:desktop": "npm run build --workspace=desktop",
+    "build:extension": "npm run build --workspace=extension",
+    "build:installer": "npm run build --workspace=installer",
+    "dev:extension": "npm run dev --workspace=extension",
+    "install:discord": "npm run install-nixcord --workspace=installer",
+    "uninstall:discord": "npm run uninstall-nixcord --workspace=installer"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "esbuild": "^0.21.4"
+  }
+}

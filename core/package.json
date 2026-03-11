@@ -1,0 +1,15 @@
+{
+  "name": "@nixcord/core",
+  "version": "1.0.0",
+  "description": "Nixcord shared core — plugin engine, patcher, settings, theme loader",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && node build.mjs",
+    "dev": "node build.mjs --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "esbuild": "^0.21.4"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@nixcord/desktop",
+  "version": "1.0.0",
+  "description": "Nixcord desktop injector for Discord Stable on Windows",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "original-fs": "^1.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.14.0"
+  }
+}
