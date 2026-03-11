@@ -61,6 +61,8 @@ async function buildExtension() {
     ["src/popup/popup.html", `${OUT_FIREFOX}/popup/popup.html`],
     ["src/popup/popup.js", `${OUT_CHROME}/popup/popup.js`],
     ["src/popup/popup.js", `${OUT_FIREFOX}/popup/popup.js`],
+    ["src/content/loader.js", `${OUT_CHROME}/content/loader.js`],
+    ["src/content/loader.js", `${OUT_FIREFOX}/content/loader.js`],
   ]) {
     fs.mkdirSync(path.dirname(dest), { recursive: true });
     if (fs.existsSync(src)) fs.copyFileSync(src, dest);
