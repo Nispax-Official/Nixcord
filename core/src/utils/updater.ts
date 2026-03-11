@@ -71,7 +71,7 @@ export async function checkForUpdate(): Promise<UpdateInfo> {
   };
 }
 
-export async function downloadBuild(sha: string): Promise<string> {
+export async function downloadBuild(_sha: string): Promise<string> {
   const branch = Settings.get("general").updateBranch || "main";
   const url = `${RAW_BASE}/${REPO_OWNER}/${REPO_NAME}/${branch}/dist/nixcord.js`;
 

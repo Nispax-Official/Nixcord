@@ -4,10 +4,8 @@
  */
 
 import type { NixcordPlugin } from "../registry";
-import { patch } from "../../patcher/index";
-import { findModuleByProps } from "../../patcher/webpack";
 
-let unpatch: (() => void) | null = null;
+let _unpatch: (() => void) | null = null;
 
 const BetterCodeblocks: NixcordPlugin = {
   id: "better-codeblocks",
@@ -66,7 +64,7 @@ const BetterCodeblocks: NixcordPlugin = {
     (this as unknown as { _observer?: MutationObserver })._observer?.disconnect();
     document.getElementById("nixcord-better-codeblocks")?.remove();
     document.querySelectorAll(".nixcord-copy-btn").forEach(b => b.remove());
-    if (unpatch) { unpatch(); unpatch = null; }
+    if (_unpatch) { _unpatch(); _unpatch = null; }
   }
 };
 

@@ -57,8 +57,6 @@ async function bootstrap() {
 
 function waitForModules(): Promise<void> {
   return new Promise(resolve => {
-    // Webpack fires a push on this array when it's done chunking
-    const originalPush = Array.prototype.push;
     let resolved = false;
 
     const checkReady = () => {
